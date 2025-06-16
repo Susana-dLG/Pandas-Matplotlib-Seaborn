@@ -44,10 +44,19 @@ The purpose of this project is to understand and explore global GDP per capita f
 * Checked the number of rows and columns, unique values, and types
 
 ```python
-df.info()
-df.describe()
 df.head()
 ```
+![image](https://github.com/user-attachments/assets/52371af4-b049-437e-8c04-03bd53884c61)
+
+df.info()
+
+![image](https://github.com/user-attachments/assets/2917ccdb-8a99-4e70-96ae-5927f8a8343a)
+
+df.describe()
+![image](https://github.com/user-attachments/assets/19034b0d-01c6-42f0-84b0-a08e4b37b31e)
+
+df.dtypes
+![image](https://github.com/user-attachments/assets/138c175b-0f43-407d-a73c-f582c13328ba)
 
 ---
 
@@ -56,8 +65,13 @@ df.head()
 * Grouped data by region or other classification to compute aggregated metrics like:
 
 ```python
-df.groupby("Region")["GDP"].mean()
+df.groupby("UN_Region")["IMF_Estimate"].mean().sort_values()
 ```
+![image](https://github.com/user-attachments/assets/c6cf7e91-1aaa-4446-b85d-d9dac4dca1df)
+
+df.groupby("UN_Region")["IMF_Estimate"].mean().sort_values(ascending=False)
+
+![image](https://github.com/user-attachments/assets/7ce18c5f-3207-461e-a4bc-f2df1d9abcb6)
 
 ---
 
@@ -66,9 +80,10 @@ df.groupby("Region")["GDP"].mean()
 * Identified GDP values reported as 0 and replaced them with the country/regional average:
 
 ```python
-df["GDP"] = df["GDP"].replace(0, np.nan)
-df["GDP"].fillna(df["GDP"].mean(), inplace=True)
+df["IMF_Estimate"] = df["IMF_Estimate"].replace(0, np.nan)
 ```
+![image](https://github.com/user-attachments/assets/ba50adb7-3313-4339-8034-57d3066fe514)
+
 
 ---
 
@@ -79,6 +94,7 @@ df["GDP"].fillna(df["GDP"].mean(), inplace=True)
 ```python
 df.isnull().sum()
 ```
+![image](https://github.com/user-attachments/assets/03ed7199-6490-40f5-9ce2-d63a0ee22837)
 
 ---
 
@@ -87,26 +103,29 @@ df.isnull().sum()
 #### 1. Histogram of GDP
 
 ```python
-plt.hist(df["GDP"])
-plt.title("Distribution of GDP per Capita")
-plt.xlabel("GDP")
-plt.ylabel("Frequency")
+df.hist(figsize=(10,8))
+plt.show()
 ```
+![image](https://github.com/user-attachments/assets/36b66542-654f-43d8-8059-17dfab0e9e0f)
+
 
 #### 2. Boxplot to Check Outliers
 
 ```python
-sns.boxplot(x=df["GDP"])
-plt.title("Boxplot of GDP per Capita")
+sns.boxplot(x=df["UN_Estimate"])
+
+plt.show()
 ```
+![image](https://github.com/user-attachments/assets/d9efecc2-303b-4072-9eec-e229729fe083)
+
 
 #### 3. GDP by Region – Bar Chart
 
 ```python
-df.groupby("Region")["GDP"].mean().plot(kind='bar')
-plt.title("Average GDP per Region")
-plt.ylabel("GDP")
+sns.barplot(x="UN_Region", y="WorldBank_Estimate", data=df, errorbar=None)
+plt.show()
 ```
+![image](https://github.com/user-attachments/assets/f1de994c-f79e-44a3-bf5a-2e47755b30f8)
 
 ---
 
@@ -120,6 +139,10 @@ Q3 = df["GDP"].quantile(0.75)
 IQR = Q3 - Q1
 df = df[(df["GDP"] >= Q1 - 1.5 * IQR) & (df["GDP"] <= Q3 + 1.5 * IQR)]
 ```
+lower_q = df["UN_Estimate"].quantile(0.25)
+lower_q #lower edge of the box
+```
+![image](https://github.com/user-attachments/assets/6c8a92b3-2c20-4912-938c-eb28d7e7d325)
 
 ---
 
@@ -139,4 +162,3 @@ df = df[(df["GDP"] >= Q1 - 1.5 * IQR) & (df["GDP"] <= Q3 + 1.5 * IQR)]
 
 ---
 
-Let me know if you want this in `.md` file format or would like GitHub badge suggestions (e.g., `Made with Python`, `Pandas`, `Seaborn`).
