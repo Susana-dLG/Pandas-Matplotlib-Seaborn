@@ -161,4 +161,6 @@ lower_q #lower edge of the box
 * **GDP (Nominal) per Capita**: Includes GDP values per country (may also include regional classification, year, etc.)
 
 ---
+Created by Susana-dLG
+May 2025
 
