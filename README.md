@@ -1,6 +1,6 @@
 ---
 
-# 🌍 GDP Per Capita Analysis with Pandas, Matplotlib & Seaborn
+## 🌍 GDP Per Capita Analysis with Pandas, Matplotlib & Seaborn
 
 This project performs a complete **Exploratory Data Analysis (EDA)** on the *GDP (Nominal) per Capita* dataset using Python libraries such as **Pandas**, **Matplotlib**, and **Seaborn**. It demonstrates techniques for inspecting, cleaning, grouping, and visualizing country-level economic data.
 
@@ -11,6 +11,9 @@ This project performs a complete **Exploratory Data Analysis (EDA)** on the *GDP
 The purpose of this project is to understand and explore global GDP per capita figures. Using publicly available data, the analysis identifies trends, handles missing values, groups countries by characteristics, visualizes distributions, and detects outliers. This is a foundational EDA project ideal for data science and analytics learners.
 
 ---
+## 📁 Dataset
+
+* **GDP (Nominal) per Capita**: Includes GDP values per country (may also include regional classification, year, etc.)
 
 ## 🛠️ Tools and Libraries Used
 
@@ -132,8 +135,7 @@ plt.show()
 ### 🧹 f. Removing Outliers
 
 * Used IQR (Interquartile Range) to detect and remove extreme outliers from the dataset:
-
-```python
+```
 Q1 = df["GDP"].quantile(0.25)
 Q3 = df["GDP"].quantile(0.75)
 IQR = Q3 - Q1
@@ -141,12 +143,13 @@ df = df[(df["GDP"] >= Q1 - 1.5 * IQR) & (df["GDP"] <= Q3 + 1.5 * IQR)]
 ```
 lower_q = df["UN_Estimate"].quantile(0.25)
 lower_q #lower edge of the box
-```
+
+``
 ![image](https://github.com/user-attachments/assets/6c8a92b3-2c20-4912-938c-eb28d7e7d325)
 
 ---
 
-## ✅ Results & Learnings
+### ✅ Results & Learnings
 
 * Learned how to treat zeros and nulls in numeric datasets
 * Explored global GDP patterns and inequalities
@@ -155,10 +158,6 @@ lower_q #lower edge of the box
 * Reinforced grouping and aggregation skills using Pandas
 
 ---
-
-## 📁 Dataset
-
-* **GDP (Nominal) per Capita**: Includes GDP values per country (may also include regional classification, year, etc.)
 
 ---
 Created by Susana-dLG
